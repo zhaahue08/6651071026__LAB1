@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BREWÉ – Beer & Beverage Catalogue</title>
+<meta name="description" content="BREWÉ: danh mục các thương hiệu bia phổ biến tại Việt Nam và quốc tế.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add("js")</script>
+<link rel="icon" type="image/svg+xml" href="Images/logo.svg">
+<link rel="icon" type="image/png" href="Images/logo.png">
+<link rel="stylesheet" href="Styles/style.css">
+</head>
+<body>
+
+<!-- Xác nhận 18+ -->
+<div class="overlay show" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="ageT">
+  <div class="box center">
+    <img src="Images/logo.svg" alt="" width="96" height="96">
+    <h2 id="ageT" class="logo">BREWÉ</h2>
+    <p>Nội dung dành cho người từ 18 tuổi trở lên. Bạn đã đủ 18 tuổi?</p>
+    <button class="btn" id="ageYes">Tôi đủ 18 tuổi</button>
+    <button class="btn ghost" id="ageNo">Chưa đủ 18 tuổi</button>
+    <p class="note" id="ageMsg"></p>
+  </div>
+</div>
+
+<header class="top">
+  <div class="wrap bar">
+    <a href="#trangchu" class="logo"><img src="Images/logo.svg" alt="" width="44" height="44"> BREWÉ</a>
+    <form class="search" id="searchForm" role="search">
+      <label for="q" class="sr">Tìm sản phẩm</label>
+      <input id="q" type="search" placeholder="Tìm tên sản phẩm hoặc thương hiệu…" autocomplete="off">
+      <button class="btn sm" type="submit">Tìm</button>
+    </form>
+    <button class="icon" id="accBtn" aria-label="Tài khoản">👤 <span id="accLabel">Đăng nhập</span></button>
+    <button class="icon" id="cartBtn" aria-label="Giỏ hàng">🛒 <b id="cartCount">0</b></button>
+    <button class="icon menu" id="menuBtn" aria-label="Mở menu" aria-expanded="false">☰</button>
+  </div>
+  <nav id="nav" aria-label="Điều hướng chính"><div class="wrap">
+    <a href="#trangchu">Trang chủ</a><a href="#thuonghieu">Thương hiệu</a><a href="#sanpham">Sản phẩm</a>
+    <a href="#khuyenmai">Khuyến mãi</a><a href="#danhgia">Đánh giá</a><a href="#tintuc">Tin tức</a><a href="#lienhe">Liên hệ</a>
+  </div></nav>
+</header>
+
+<main>
+<section id="trangchu" class="hero"><div class="wrap">
+  <p class="eyebrow">Hương vị Việt · Tinh hoa thế giới</p>
+  <h1>Khám phá bia <em>Việt Nam</em><br>và quốc tế</h1>
+  <p>Danh mục các thương hiệu bia phổ biến tại Việt Nam và trên thế giới.</p>
+  <a class="btn" href="#sanpham">Xem danh mục</a>
+</div></section>
+
+<section class="wrap sec" aria-labelledby="h-cat">
+  <h2 id="h-cat" data-k="Khám phá">Danh mục sản phẩm</h2>
+  <div class="cats" id="cats"></div>
+</section>
+
+<section id="thuonghieu" class="alt"><div class="wrap sec">
+  <h2 data-k="Thương hiệu">Thương hiệu nổi bật</h2>
+  <div class="chips" id="brandChips"></div>
+</div></section>
+
+<section class="wrap sec" aria-labelledby="h-feat">
+  <h2 id="h-feat" data-k="Được yêu thích">Sản phẩm nổi bật</h2>
+  <div class="grid" id="featGrid"></div>
+</section>
+
+<section class="alt" aria-labelledby="h-about"><div class="wrap sec about">
+  <div><h2 id="h-about" data-k="Câu chuyện">Về BREWÉ</h2>
+  <p>BREWÉ giới thiệu danh mục các thương hiệu bia phổ biến, giúp bạn tra cứu, so sánh và lựa chọn dễ dàng.</p></div>
+  <ul class="ticks"><li>Thông tin sản phẩm rõ ràng, minh bạch</li><li>Phân loại rõ bia, bia không cồn và cider</li><li>Nhắc uống có trách nhiệm</li></ul>
+</div></section>
+
+<section id="sanpham" class="wrap sec" aria-labelledby="h-all">
+  <h2 id="h-all" data-k="Bộ sưu tập">Tất cả sản phẩm</h2>
+  <div class="tools">
+    <label>Thương hiệu <select id="fBrand"><option value="">Tất cả</option></select></label>
+    <label>Nhóm <select id="fCat"><option value="">Tất cả</option></select></label>
+    <label>Sắp xếp <select id="fSort"><option value="">Mặc định</option><option value="az">Tên A–Z</option><option value="za">Tên Z–A</option><option value="pa">Giá tăng dần</option><option value="pd">Giá giảm dần</option></select></label>
+    <button class="btn ghost sm" id="clearBtn">Xóa bộ lọc</button>
+  </div>
+  <p id="count" class="note" aria-live="polite"></p>
+  <div class="grid" id="grid"></div>
+  <p id="empty" class="center" hidden>Không tìm thấy sản phẩm phù hợp.</p>
+  <div class="center"><button class="btn" id="moreBtn">Xem thêm</button></div>
+</section>
+
+<section id="khuyenmai" class="promo"><div class="wrap center">
+  <h2 data-k="Ưu đãi">Khuyến mãi</h2>
+  <p>Khám phá các nhóm sản phẩm nổi bật tại BREWÉ.</p>
+  <div class="promoGrid" id="promoGrid"></div>
+</div></section>
+
+<section id="danhgia" class="wrap sec" aria-labelledby="h-rev">
+  <h2 id="h-rev" data-k="Khách hàng nói gì">Đánh giá & phản hồi</h2>
+  <div class="revTop">
+    <div class="sum"><div class="avg" id="avg">0</div><div id="stars"></div><small id="total"></small></div>
+    <div id="bars"></div>
+    <form id="revForm" novalidate>
+      <label>Tên hiển thị <input id="rName" maxlength="30"></label>
+      <label>Sản phẩm <select id="rProd"></select></label>
+      <label>Số sao <select id="rStar"><option value="">Chọn</option><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select></label>
+      <label>Nhận xét <textarea id="rText" rows="3" maxlength="300"></textarea></label>
+      <p class="err" id="rErr" role="alert"></p>
+      <button class="btn" type="submit">Gửi đánh giá</button>
+    </form>
+  </div>
+  <div class="tools">
+    <label>Lọc sao <select id="vStar"><option value="">Tất cả</option><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select></label>
+    <label>Sản phẩm <select id="vProd"></select></label>
+    <label class="chk"><input type="checkbox" id="adminMode"> Chế độ quản trị</label>
+  </div>
+  <div id="revList"></div>
+</section>
+
+<section id="tintuc" class="alt"><div class="wrap sec">
+  <h2 data-k="Cẩm nang">Tin tức</h2>
+  <div class="grid news">
+    <article class="card"><h3>Phân biệt bia và cider</h3><p>Cider làm từ táo nên được xếp riêng khỏi bia.</p></article>
+    <article class="card"><h3>Bia không cồn là gì?</h3><p>Nhóm sản phẩm tách riêng để dễ chọn lọc.</p></article>
+    <article class="card"><h3>Uống có trách nhiệm</h3><p>Không lái xe sau khi uống. Người dưới 18 tuổi không sử dụng.</p></article>
+  </div>
+</div></section>
+
+<section class="wrap sec center" aria-labelledby="h-news">
+  <h2 id="h-news" data-k="Bản tin">Đăng ký nhận tin</h2>
+  <form id="nlForm" class="nl" novalidate>
+    <label class="sr" for="nlMail">Email</label>
+    <input id="nlMail" type="email" placeholder="email@vidu.com">
+    <button class="btn" type="submit">Đăng ký</button>
+  </form>
+  <p class="note" id="nlMsg" aria-live="polite">Nhận tin mới nhất về sản phẩm và thương hiệu.</p>
+</section>
+<section id="lienhe" class="alt contact"><div class="wrap sec">
+  <h2 data-k="Kết nối">Liên hệ BREWÉ</h2>
+  <div class="cgrid">
+    <div class="cinfo">
+      <div class="ci2"><span>📍</span><div><b>Địa chỉ</b><br>306 Hiện Hữu, TP. Hồ Chí Minh</div></div>
+      <div class="ci2"><span>📞</span><div><b>Hotline</b><br>0900 000 306</div></div>
+      <div class="ci2"><span>✉️</span><div><b>Email</b><br>hello@brewe.example</div></div>
+      <div class="ci2"><span>🕘</span><div><b>Giờ làm việc</b><br>Thứ Hai – Chủ Nhật: 9:00 – 21:00</div></div>
+    </div>
+    <form id="ctForm" novalidate>
+      <label>Họ và tên <input id="cName" maxlength="40"></label>
+      <label>Email <input id="cMail" type="email"></label>
+      <label>Nội dung <textarea id="cText" rows="4" maxlength="400"></textarea></label>
+      <p class="err" id="cErr" role="alert"></p>
+      <button class="btn" type="submit">Gửi liên hệ</button>
+    </form>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <div><span class="logo"><img src="Images/logo.svg" alt="" width="40" height="40"> BREWÉ</span><p>306 Hiện Hữu, TP. Hồ Chí Minh · 0900 000 306 · hello@brewe.example</p></div>
+  <p class="note">Uống có trách nhiệm. Không lái xe sau khi uống. Chỉ dành cho người từ 18 tuổi.</p>
+</div></footer>
+
+<button id="topBtn" class="topBtn" aria-label="Lên đầu trang" hidden>↑</button>
+
+<div class="overlay" id="pModal" role="dialog" aria-modal="true" aria-label="Chi tiết sản phẩm"><div class="box" id="pBody"></div></div>
+
+<div class="overlay" id="cartModal" role="dialog" aria-modal="true" aria-label="Giỏ hàng"><div class="box">
+  <button class="x" data-close aria-label="Đóng">×</button>
+  <h2>Giỏ hàng</h2><div id="cartList"></div>
+  <p><b>Tạm tính: <span id="subtotal">0</span></b></p>
+</div></div>
+
+<div class="overlay" id="accModal" role="dialog" aria-modal="true" aria-label="Tài khoản"><div class="box">
+  <button class="x" data-close aria-label="Đóng">×</button>
+  <h2>Tài khoản</h2>
+  <form id="accForm" novalidate>
+    <label>Tên hiển thị <input id="accName" maxlength="20" value="Khách demo"></label>
+    <button class="btn" type="submit" id="accSubmit">Đăng nhập</button>
+  </form>
+</div></div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="Scripts/script.js"></script>
+</body>
+</html>
